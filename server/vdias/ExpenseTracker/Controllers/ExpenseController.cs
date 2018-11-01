@@ -3,9 +3,9 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace ExpenseTracker.Controllers
+namespace vdias.ExpenseTracker.Controllers
 {
-    using ExpenseTracker.Models;
+    using vdias.ExpenseTracker.Models;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>

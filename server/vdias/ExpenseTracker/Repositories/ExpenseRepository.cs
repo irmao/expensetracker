@@ -3,9 +3,9 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace ExpenseTracker.Repositories
+namespace vdias.ExpenseTracker.Repositories
 {
-    using ExpenseTracker.Models;
+    using vdias.ExpenseTracker.Models;
 
     /// <summary>
     /// Repository class for the <see cref="Expense"/> model.

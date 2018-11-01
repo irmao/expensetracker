@@ -3,10 +3,10 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace ExpenseTracker.Repositories
+namespace vdias.ExpenseTracker.Repositories
 {
     using System.Linq;
-    using ExpenseTracker.Models;
+    using vdias.ExpenseTracker.Models;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
