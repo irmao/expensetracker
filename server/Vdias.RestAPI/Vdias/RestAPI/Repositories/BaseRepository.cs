@@ -62,6 +62,24 @@ namespace Vdias.RestAPI.Repositories
         }
 
         /// <summary>
+        /// Updates an existing record in to the database.
+        /// </summary>
+        /// <param name="record">The record to be updated.</param>
+        public virtual void Update(TEntity record)
+        {
+            this.context.Update(record);
+        }
+
+        /// <summary>
+        /// Deletes an existing record.
+        /// </summary>
+        /// <param name="record">Record to be deleted.</param>
+        public virtual void Delete(TEntity record)
+        {
+            this.context.Remove(record);
+        }
+
+        /// <summary>
         /// Saves the changes made in the context.
         /// </summary>
         /// <returns>The code returned by the db context save changes.</returns>

@@ -78,6 +78,7 @@
     <Rule Id="SA1412" Action="None" />
     <Rule Id="SA1600" Action="None" />
     <Rule Id="SA1609" Action="None" />
+    <Rule Id="SA1636" Action="None" />
     <Rule Id="SA1640" Action="None" />
   </Rules>
   <Rules AnalyzerId="DocumentationAnalyzers" RuleNamespace="DocumentationAnalyzers">

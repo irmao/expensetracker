@@ -39,6 +39,7 @@ namespace Vdias.RestAPI.Controllers
         /// <summary>
         /// Returns a list with all the entities
         /// </summary>
+        /// <param name="searchDto">DTO to filter the elements to be returned</param>
         /// <returns>Action Result wrapping the list of returned entities.</returns>
         [HttpGet]
         public virtual ActionResult<List<TEntity>> Find([FromQuery] TSearchDto searchDto)
@@ -81,6 +82,45 @@ namespace Vdias.RestAPI.Controllers
             this.repository.SaveChanges();
 
             return this.CreatedAtAction(nameof(this.Find), new { id = record.Id }, record);
+        }
+
+        /// <summary>
+        /// Updates an existing entity.
+        /// </summary>
+        /// <param name="id">The id of the entity to be updated.</param>
+        /// <param name="record">The entity data to be updated.</param>
+        /// <returns>Action result for NoContent.</returns>
+        [HttpPut("{id}")]
+        public virtual ActionResult<NoContentResult> Update(long id, [FromBody] TEntity record)
+        {
+            if (id != record.Id || !this.ModelState.IsValid)
+            {
+                return this.BadRequest();
+            }
+
+            this.repository.Update(record);
+            this.repository.SaveChanges();
+
+            return this.NoContent();
+        }
+
+        /// <summary>
+        /// Deletes an existing entity.
+        /// </summary>
+        /// <param name="id">The id of the entity to be deleted.</param>
+        /// <returns>ActionResult for NoContent</returns>
+        [HttpDelete("{id}")]
+        public virtual ActionResult<NoContentResult> Delete(long id)
+        {
+            var entity = this.repository.FindOne(id);
+
+            if (entity != null)
+            {
+                this.repository.Delete(entity);
+                this.repository.SaveChanges();
+            }
+
+            return this.NoContent();
         }
     }
 }
