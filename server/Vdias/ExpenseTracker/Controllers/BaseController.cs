@@ -1,16 +1,16 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ExpenseTrackerControllerBase.cs" company="Vinicius Dias">
+// <copyright file="BaseController.cs" company="Vinicius Dias">
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Controllers
+namespace Vdias.ExpenseTracker.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using vdias.ExpenseTracker.Models;
-    using vdias.ExpenseTracker.Repositories;
+    using Vdias.ExpenseTracker.Models;
+    using Vdias.ExpenseTracker.Repositories;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -18,18 +18,18 @@ namespace vdias.ExpenseTracker.Controllers
     /// </summary>
     /// <typeparam name="TEntity">The entity type that will be accessed/modified through this endpoint.</typeparam>
     [ApiController]
-    public abstract class ExpenseTrackerControllerBase<TEntity> : ControllerBase
-        where TEntity : ModelBase
+    public abstract class BaseController<TEntity> : ControllerBase
+        where TEntity : BaseModel
     {
-        private RepositoryBase<TEntity> repository;
+        private BaseRepository<TEntity> repository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExpenseTrackerControllerBase{TEntity}"/> class.
+        /// Initializes a new instance of the <see cref="BaseController{TEntity}"/> class.
         /// </summary>
         /// <param name="context">The db context</param>
-        public ExpenseTrackerControllerBase(ExpenseTrackerDBContext context)
+        public BaseController(ExpenseTrackerDBContext context)
         {
-            this.repository = new RepositoryBase<TEntity>(context);
+            this.repository = new BaseRepository<TEntity>(context);
         }
 
         /// <summary>

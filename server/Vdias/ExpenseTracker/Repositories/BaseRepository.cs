@@ -1,20 +1,20 @@
 //-----------------------------------------------------------------------
-// <copyright file="RepositoryBase.cs" company="Vinicius Dias">
+// <copyright file="BaseRepository.cs" company="Vinicius Dias">
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Repositories
+namespace Vdias.ExpenseTracker.Repositories
 {
     using System.Linq;
-    using vdias.ExpenseTracker.Models;
+    using Vdias.ExpenseTracker.Models;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// Base class for a generic repository.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity being stored.</typeparam>
-    public class RepositoryBase<TEntity>
-        where TEntity : ModelBase
+    public class BaseRepository<TEntity>
+        where TEntity : BaseModel
     {
         /// <summary>
         /// The ExpenseTracker db context.
@@ -22,10 +22,10 @@ namespace vdias.ExpenseTracker.Repositories
         private readonly ExpenseTrackerDBContext context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RepositoryBase{TEntity}"/> class.
+        /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
         /// </summary>
         /// <param name="context">The context</param>
-        public RepositoryBase(ExpenseTrackerDBContext context)
+        public BaseRepository(ExpenseTrackerDBContext context)
         {
             this.context = context;
         }

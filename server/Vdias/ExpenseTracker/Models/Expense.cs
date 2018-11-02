@@ -3,7 +3,7 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Models
+namespace Vdias.ExpenseTracker.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -13,7 +13,7 @@ namespace vdias.ExpenseTracker.Models
     /// Model that represents an expense.
     /// </summary>
     [Table("Expense")]
-    public class Expense : ModelBase
+    public class Expense : BaseModel
     {
         /// <summary>
         /// Gets or sets the expense value.
@@ -38,14 +38,16 @@ namespace vdias.ExpenseTracker.Models
         /// </summary>
         public string Comment { get; set; }
 
+        /*
         /// <summary>
         /// Gets or sets the expense type.
         /// </summary>
-        // public ExpenseType ExpenseType { get; set; }
+        public ExpenseType ExpenseType { get; set; }
 
         /// <summary>
         /// Gets or sets the expense frequency.
         /// </summary>
-        // public ExpenseFrequency ExpenseFrequency { get; set; }
+        public ExpenseFrequency ExpenseFrequency { get; set; }
+        */
     }
 }

@@ -3,9 +3,9 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Controllers
+namespace Vdias.ExpenseTracker.Controllers
 {
-    using vdias.ExpenseTracker.Models;
+    using Vdias.ExpenseTracker.Models;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -13,7 +13,7 @@ namespace vdias.ExpenseTracker.Controllers
     /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}/expenses")]
-    public class ExpenseController : ExpenseTrackerControllerBase<Expense>
+    public class ExpenseController : BaseController<Expense>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpenseController"/> class.

@@ -3,14 +3,14 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Repositories
+namespace Vdias.ExpenseTracker.Repositories
 {
-    using vdias.ExpenseTracker.Models;
+    using Vdias.ExpenseTracker.Models;
 
     /// <summary>
     /// Repository class for the <see cref="Expense"/> model.
     /// </summary>
-    public class ExpenseRepository : RepositoryBase<Expense>
+    public class ExpenseRepository : BaseRepository<Expense>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpenseRepository"/> class.

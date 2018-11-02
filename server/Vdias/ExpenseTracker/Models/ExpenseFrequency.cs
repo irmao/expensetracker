@@ -3,12 +3,12 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Models
+namespace Vdias.ExpenseTracker.Models
 {
     /// <summary>
     /// Model that represents the frequency that the expense occurs.
     /// </summary>
-    public class ExpenseFrequency : ModelBase
+    public class ExpenseFrequency : BaseModel
     {
         /// <summary>
         /// Gets or sets the description.

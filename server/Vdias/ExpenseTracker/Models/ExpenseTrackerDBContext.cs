@@ -3,7 +3,7 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Models
+namespace Vdias.ExpenseTracker.Models
 {
     using Microsoft.EntityFrameworkCore;
 

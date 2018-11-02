@@ -3,12 +3,12 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Models
+namespace Vdias.ExpenseTracker.Models
 {
     /// <summary>
     /// Model that represents an expense type.
     /// </summary>
-    public class ExpenseType : ModelBase
+    public class ExpenseType : BaseModel
     {
         /// <summary>
         /// Gets or sets the description.

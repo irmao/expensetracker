@@ -1,9 +1,9 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ModelBase.cs" company="Vinicius Dias">
+// <copyright file="BaseModel.cs" company="Vinicius Dias">
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace vdias.ExpenseTracker.Models
+namespace Vdias.ExpenseTracker.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -11,7 +11,7 @@ namespace vdias.ExpenseTracker.Models
     /// <summary>
     /// Base class for a Model.
     /// </summary>
-    public class ModelBase
+    public class BaseModel
     {
         /// <summary>
         /// Gets or sets the identifier of the model.
