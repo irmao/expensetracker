@@ -12,7 +12,7 @@ namespace ExpenseTracker
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Vdias.ExpenseTracker.Models;
+    using Swashbuckle.AspNetCore.Swagger;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,12 +22,28 @@ namespace ExpenseTracker
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
+    using Vdias.ExpenseTracker.Models;
 
     /// <summary>
     /// Startup class.
     /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// The major version of the API
+        /// </summary>
+        private static readonly int API_MAJOR_VERSION = 1;
+
+        /// <summary>
+        /// The minor version of the API
+        /// </summary>
+        private static readonly int API_MINOR_VERSION = 0;
+
+        /// <summary>
+        /// The API version as string.
+        /// </summary>
+        private static readonly string API_VERSION = string.Format("{0}.{1}", API_MAJOR_VERSION, API_MINOR_VERSION);
+
         /// <summary>
         /// Initializes the Startup class.
         /// </summary>
@@ -49,9 +65,10 @@ namespace ExpenseTracker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddApiVersioning(options => options.DefaultApiVersion = new ApiVersion(1, 0));
-            services.AddEntityFrameworkNpgsql().AddDbContext<ExpenseTrackerDBContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("ExpenseTrackerDatabase")));
+
+            this.ConfigureApiVersioning(services);
+            this.ConfigureDatabase(services);
+            this.ConfigureSwagger(services);
         }
 
         /// <summary>
@@ -77,8 +94,50 @@ namespace ExpenseTracker
                 context.Database.Migrate();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint(string.Format("/swagger/{0}/swagger.json", API_VERSION), "ExpenseTracker Web API");
+            });
+
             // app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        /// <summary>
+        /// Configures the api versioning.
+        /// </summary>
+        /// <param name="services">The services collection</param>
+        private void ConfigureApiVersioning(IServiceCollection services)
+        {
+            services.AddApiVersioning(options => options.DefaultApiVersion = new ApiVersion(API_MAJOR_VERSION,
+                API_MINOR_VERSION));
+        }
+
+        /// <summary>
+        /// Configures the database connection and options.
+        /// </summary>
+        /// <param name="services">The services collection</param>
+        private void ConfigureDatabase(IServiceCollection services)
+        {
+            services.AddEntityFrameworkNpgsql().AddDbContext<ExpenseTrackerDBContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("ExpenseTrackerDatabase")));
+        }
+
+        /// <summary>
+        /// Adds the SWAGGER configuration.
+        /// </summary>
+        /// <param name="services">The services collection</param>
+        private void ConfigureSwagger(IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(API_VERSION, new Info
+                {
+                    Title = "ExpenseTracker Web API",
+                    Version = API_VERSION
+                });
+            });
         }
     }
 }

@@ -53,6 +53,16 @@ namespace Vdias.RestAPI.Repositories
         }
 
         /// <summary>
+        /// Checks whether an entity with the given id exists in the database.
+        /// </summary>
+        /// <param name="id">The id of the element to be found.</param>
+        /// <returns>True if the element is present in the db, false otherwise.</returns>
+        public virtual bool Any(long id)
+        {
+            return this.context.Set<TEntity>().Any(e => e.Id == id);
+        }
+
+        /// <summary>
         /// Adds to the database a new record.
         /// </summary>
         /// <param name="record">The record to be added.</param>
