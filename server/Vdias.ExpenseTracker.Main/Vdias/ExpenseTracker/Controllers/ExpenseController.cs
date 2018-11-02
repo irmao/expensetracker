@@ -6,6 +6,7 @@
 namespace Vdias.ExpenseTracker.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Vdias.ExpenseTracker.Dtos;
     using Vdias.ExpenseTracker.Models;
     using Vdias.RestAPI.Controllers;
 
@@ -14,7 +15,7 @@ namespace Vdias.ExpenseTracker.Controllers
     /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}/expenses")]
-    public class ExpenseController : BaseController<Expense>
+    public class ExpenseController : BaseController<Expense, ExpenseSearchDto>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpenseController"/> class.

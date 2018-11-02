@@ -7,6 +7,7 @@ namespace Vdias.RestAPI.Repositories
 {
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
+    using Vdias.RestAPI.Dtos;
     using Vdias.RestAPI.Models;
 
     /// <summary>
@@ -31,22 +32,23 @@ namespace Vdias.RestAPI.Repositories
         }
 
         /// <summary>
-        /// Returns an IQueryable with all the elements in the database.
+        /// Returns an IQueryable with all the elements in the database that match the given filters.
         /// </summary>
+        /// <param name="dto">The search dto that will apply the filters.</param>
         /// <returns>An IQueryable with all the elements in the database</returns>
-        public virtual IQueryable<TEntity> Find()
+        public virtual IQueryable<TEntity> Find(BaseSearchDto<TEntity> dto)
         {
-            return this.context.Set<TEntity>();
+            return dto.ApplyFilter(this.context.Set<TEntity>());
         }
 
         /// <summary>
-        /// Gets a single element with the given id.
+        /// Finds a single element with the given id.
         /// </summary>
         /// <param name="id">The id of the element to be found.</param>
         /// <returns>The element</returns>
-        public virtual TEntity Find(long id)
+        public virtual TEntity FindOne(long id)
         {
-            return this.Find().SingleOrDefault(e => e.Id == id);
+            return this.context.Set<TEntity>().SingleOrDefault(e => e.Id == id);
         }
 
         /// <summary>

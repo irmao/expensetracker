@@ -11,6 +11,7 @@ namespace Vdias.RestAPI.Controllers
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Vdias.RestAPI.Dtos;
     using Vdias.RestAPI.Models;
     using Vdias.RestAPI.Repositories;
 
@@ -18,16 +19,18 @@ namespace Vdias.RestAPI.Controllers
     /// Base class for the API controllers in the application.
     /// </summary>
     /// <typeparam name="TEntity">The entity type that will be accessed/modified through this endpoint.</typeparam>
+    /// <typeparam name="TSearchDto">The search dto type that will be responsible to filter the entities to be found.</typeparam>
     [ApiController]
-    public abstract class BaseController<TEntity> : ControllerBase
+    public abstract class BaseController<TEntity, TSearchDto> : ControllerBase
         where TEntity : BaseModel
+        where TSearchDto : BaseSearchDto<TEntity>
     {
         private readonly BaseRepository<TEntity> repository;
 
         private readonly DbContext context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseController{TEntity}"/> class.
+        /// Initializes a new instance of the <see cref="BaseController{TEntity, TSearchDto}"/> class.
         /// </summary>
         /// <param name="context">The db context</param>
         public BaseController(DbContext context)
@@ -41,9 +44,9 @@ namespace Vdias.RestAPI.Controllers
         /// </summary>
         /// <returns>Action Result wrapping the list of returned entities.</returns>
         [HttpGet]
-        public virtual ActionResult<List<TEntity>> Find()
+        public virtual ActionResult<List<TEntity>> Find([FromQuery] TSearchDto searchDto)
         {
-            return new OkObjectResult(this.repository.Find());
+            return new OkObjectResult(this.repository.Find(searchDto));
         }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace Vdias.RestAPI.Controllers
         [HttpGet("{id}")]
         public virtual ActionResult<TEntity> Find(long id)
         {
-            var record = this.repository.Find(id);
+            var record = this.repository.FindOne(id);
 
             if (record == null)
             {
@@ -74,13 +77,13 @@ namespace Vdias.RestAPI.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return this.BadRequest(ModelState);
+                return this.BadRequest(this.ModelState);
             }
 
             this.repository.Create(record);
             this.context.SaveChanges();
 
-            return this.CreatedAtAction(nameof(Find), new { id = record.Id }, record);
+            return this.CreatedAtAction(nameof(this.Find), new { id = record.Id }, record);
         }
     }
 }
