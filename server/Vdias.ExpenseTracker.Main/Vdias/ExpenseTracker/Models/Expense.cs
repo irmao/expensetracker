@@ -46,9 +46,19 @@ namespace Vdias.ExpenseTracker.Models
         public ExpenseType ExpenseType { get; set; }
 
         /// <summary>
+        /// Gets or sets the expense type id.
+        /// </summary>
+        public long ExpenseTypeId { get; set; }
+
+        /// <summary>
         /// Gets or sets the expense frequency.
         /// </summary>
         [Required]
         public ExpenseFrequency ExpenseFrequency { get; set; }
+
+        /// <summary>
+        /// Gets or sets the expense frequency id.
+        /// </summary>
+        public long ExpenseFrequencyId { get; set; }
     }
 }

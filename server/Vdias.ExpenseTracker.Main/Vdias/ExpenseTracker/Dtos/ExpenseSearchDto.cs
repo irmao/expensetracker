@@ -15,9 +15,14 @@ namespace Vdias.ExpenseTracker.Dtos
     public class ExpenseSearchDto : BaseSearchDto<Expense>
     {
         /// <summary>
-        /// Gets or sets the id to filter by.
+        /// Gets or sets the expense type id to filter by.
         /// </summary>
-        public int? Id { get; set; }
+        public long? ExpenseTypeId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the expense frequency id to filter by.
+        /// </summary>
+        public long? ExpenseFrequencyId { get; set; }
 
         /// <summary>
         /// Applies the filters.
@@ -26,9 +31,14 @@ namespace Vdias.ExpenseTracker.Dtos
         /// <returns>The updated query</returns>
         public override IQueryable<Expense> ApplyFilter(IQueryable<Expense> query)
         {
-            if (this.Id != null)
+            if (this.ExpenseFrequencyId != null)
             {
-                query = query.Where(e => e.Id == this.Id);
+                query = query.Where(e => e.ExpenseFrequencyId == this.ExpenseFrequencyId);
+            }
+
+            if (this.ExpenseTypeId != null)
+            {
+                query = query.Where(e => e.ExpenseTypeId == this.ExpenseTypeId);
             }
 
             return query;
