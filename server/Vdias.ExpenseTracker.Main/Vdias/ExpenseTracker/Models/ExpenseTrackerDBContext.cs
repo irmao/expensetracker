@@ -25,5 +25,15 @@ namespace Vdias.ExpenseTracker.Models
         /// Gets or sets the Expenses db reference.
         /// </summary>
         public DbSet<Expense> Expenses { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Expense Types db reference.
+        /// </summary>
+        public DbSet<ExpenseType> ExpenseTypess { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Expense Frequencies db reference.
+        /// </summary>
+        public DbSet<ExpenseFrequency> ExpenseFrequencies { get; set; }
     }
 }

@@ -39,16 +39,16 @@ namespace Vdias.ExpenseTracker.Models
         /// </summary>
         public string Comment { get; set; }
 
-        /*
         /// <summary>
         /// Gets or sets the expense type.
         /// </summary>
+        [Required]
         public ExpenseType ExpenseType { get; set; }
 
         /// <summary>
         /// Gets or sets the expense frequency.
         /// </summary>
+        [Required]
         public ExpenseFrequency ExpenseFrequency { get; set; }
-        */
     }
 }
