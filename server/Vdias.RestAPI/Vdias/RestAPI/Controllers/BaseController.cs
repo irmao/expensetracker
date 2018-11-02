@@ -27,8 +27,6 @@ namespace Vdias.RestAPI.Controllers
     {
         private readonly BaseRepository<TEntity> repository;
 
-        private readonly DbContext context;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseController{TEntity, TSearchDto}"/> class.
         /// </summary>
@@ -36,7 +34,6 @@ namespace Vdias.RestAPI.Controllers
         public BaseController(DbContext context)
         {
             this.repository = new BaseRepository<TEntity>(context);
-            this.context = context;
         }
 
         /// <summary>
@@ -81,7 +78,7 @@ namespace Vdias.RestAPI.Controllers
             }
 
             this.repository.Create(record);
-            this.context.SaveChanges();
+            this.repository.SaveChanges();
 
             return this.CreatedAtAction(nameof(this.Find), new { id = record.Id }, record);
         }

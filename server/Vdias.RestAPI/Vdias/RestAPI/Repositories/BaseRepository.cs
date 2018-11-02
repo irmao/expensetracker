@@ -6,6 +6,7 @@
 namespace Vdias.RestAPI.Repositories
 {
     using System.Linq;
+    using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
     using Vdias.RestAPI.Dtos;
     using Vdias.RestAPI.Models;
@@ -58,6 +59,24 @@ namespace Vdias.RestAPI.Repositories
         public virtual void Create(TEntity record)
         {
             this.context.Add(record);
+        }
+
+        /// <summary>
+        /// Saves the changes made in the context.
+        /// </summary>
+        /// <returns>The code returned by the db context save changes.</returns>
+        public virtual int SaveChanges()
+        {
+            return this.context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Saves the changes made in the context asynchrosnously.
+        /// </summary>
+        /// <returns>The task that resolves to the code returned by the db context save changes.</returns>
+        public virtual Task<int> SaveChangesAsync()
+        {
+            return this.context.SaveChangesAsync();
         }
     }
 }
