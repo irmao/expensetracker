@@ -3,7 +3,7 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Vdias.ExpenseTracker.Models
+namespace Vdias.RestAPI.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;

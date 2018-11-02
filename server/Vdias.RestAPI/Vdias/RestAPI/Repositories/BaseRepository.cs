@@ -3,11 +3,11 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Vdias.ExpenseTracker.Repositories
+namespace Vdias.RestAPI.Repositories
 {
     using System.Linq;
-    using Vdias.ExpenseTracker.Models;
     using Microsoft.EntityFrameworkCore;
+    using Vdias.RestAPI.Models;
 
     /// <summary>
     /// Base class for a generic repository.
@@ -17,15 +17,15 @@ namespace Vdias.ExpenseTracker.Repositories
         where TEntity : BaseModel
     {
         /// <summary>
-        /// The ExpenseTracker db context.
+        /// The db context.
         /// </summary>
-        private readonly ExpenseTrackerDBContext context;
+        private readonly DbContext context;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
         /// </summary>
         /// <param name="context">The context</param>
-        public BaseRepository(ExpenseTrackerDBContext context)
+        public BaseRepository(DbContext context)
         {
             this.context = context;
         }

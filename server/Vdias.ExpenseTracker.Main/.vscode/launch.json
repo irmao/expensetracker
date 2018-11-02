@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.1/ExpenseTracker.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.1/Vdias.ExpenseTracker.Main.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

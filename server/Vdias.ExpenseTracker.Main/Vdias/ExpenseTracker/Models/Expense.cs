@@ -8,6 +8,7 @@ namespace Vdias.ExpenseTracker.Models
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Vdias.RestAPI.Models;
 
     /// <summary>
     /// Model that represents an expense.

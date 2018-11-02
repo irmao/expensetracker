@@ -5,8 +5,9 @@
 //-----------------------------------------------------------------------
 namespace Vdias.ExpenseTracker.Controllers
 {
-    using Vdias.ExpenseTracker.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Vdias.ExpenseTracker.Models;
+    using Vdias.RestAPI.Controllers;
 
     /// <summary>
     /// Controller class for the <see cref="Expense"/> entity.

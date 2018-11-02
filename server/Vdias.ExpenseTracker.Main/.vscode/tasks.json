@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/ExpenseTracker.csproj"
+                "${workspaceFolder}/Vdias.ExpenseTracker.Main.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

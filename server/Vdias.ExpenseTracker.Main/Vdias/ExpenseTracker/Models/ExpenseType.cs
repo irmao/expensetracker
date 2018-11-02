@@ -5,6 +5,8 @@
 //-----------------------------------------------------------------------
 namespace Vdias.ExpenseTracker.Models
 {
+    using Vdias.RestAPI.Models;
+
     /// <summary>
     /// Model that represents an expense type.
     /// </summary>

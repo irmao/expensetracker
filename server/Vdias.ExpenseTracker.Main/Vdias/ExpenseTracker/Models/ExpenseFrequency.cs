@@ -5,6 +5,8 @@
 //-----------------------------------------------------------------------
 namespace Vdias.ExpenseTracker.Models
 {
+    using Vdias.RestAPI.Models;
+
     /// <summary>
     /// Model that represents the frequency that the expense occurs.
     /// </summary>

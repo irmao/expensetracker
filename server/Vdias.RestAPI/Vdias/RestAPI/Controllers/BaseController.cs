@@ -3,15 +3,16 @@
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Vdias.ExpenseTracker.Controllers
+namespace Vdias.RestAPI.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Vdias.ExpenseTracker.Models;
-    using Vdias.ExpenseTracker.Repositories;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Vdias.RestAPI.Models;
+    using Vdias.RestAPI.Repositories;
 
     /// <summary>
     /// Base class for the API controllers in the application.
@@ -27,7 +28,7 @@ namespace Vdias.ExpenseTracker.Controllers
         /// Initializes a new instance of the <see cref="BaseController{TEntity}"/> class.
         /// </summary>
         /// <param name="context">The db context</param>
-        public BaseController(ExpenseTrackerDBContext context)
+        public BaseController(DbContext context)
         {
             this.repository = new BaseRepository<TEntity>(context);
         }

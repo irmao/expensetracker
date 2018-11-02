@@ -6,6 +6,7 @@
 namespace Vdias.ExpenseTracker.Repositories
 {
     using Vdias.ExpenseTracker.Models;
+    using Vdias.RestAPI.Repositories;
 
     /// <summary>
     /// Repository class for the <see cref="Expense"/> model.
