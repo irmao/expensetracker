@@ -22,7 +22,9 @@ namespace Vdias.RestAPI.Controllers
     public abstract class BaseController<TEntity> : ControllerBase
         where TEntity : BaseModel
     {
-        private BaseRepository<TEntity> repository;
+        private readonly BaseRepository<TEntity> repository;
+
+        private readonly DbContext context;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseController{TEntity}"/> class.
@@ -31,6 +33,7 @@ namespace Vdias.RestAPI.Controllers
         public BaseController(DbContext context)
         {
             this.repository = new BaseRepository<TEntity>(context);
+            this.context = context;
         }
 
         /// <summary>
@@ -38,9 +41,9 @@ namespace Vdias.RestAPI.Controllers
         /// </summary>
         /// <returns>Action Result wrapping the list of returned entities.</returns>
         [HttpGet]
-        public virtual ActionResult<List<TEntity>> GetAll()
+        public virtual ActionResult<List<TEntity>> Find()
         {
-            return new OkObjectResult(this.repository.GetAll());
+            return new OkObjectResult(this.repository.Find());
         }
 
         /// <summary>
@@ -48,10 +51,10 @@ namespace Vdias.RestAPI.Controllers
         /// </summary>
         /// <param name="id">The id of the entity to be found.</param>
         /// <returns>Action Result wrapping the entity found</returns>
-        [HttpGet("id")]
-        public virtual ActionResult<TEntity> GetOne(long id)
+        [HttpGet("{id}")]
+        public virtual ActionResult<TEntity> Find(long id)
         {
-            var record = this.repository.GetOne(id);
+            var record = this.repository.Find(id);
 
             if (record == null)
             {
@@ -69,14 +72,15 @@ namespace Vdias.RestAPI.Controllers
         [HttpPost]
         public virtual ActionResult<TEntity> Create([FromBody] TEntity record)
         {
-            this.repository.Create(record);
-            return new CreatedAtActionResult("GetOne", this.EndPoint(), new { id = record.Id }, record);
-        }
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(ModelState);
+            }
 
-        /// <summary>
-        /// Abstract method that returns the endpoint of the controller which is implementing this base class.
-        /// </summary>
-        /// <returns>A string with the controller's endpoint.</returns>
-        public abstract string EndPoint();
+            this.repository.Create(record);
+            this.context.SaveChanges();
+
+            return this.CreatedAtAction(nameof(Find), new { id = record.Id }, record);
+        }
     }
 }

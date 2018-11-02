@@ -24,14 +24,5 @@ namespace Vdias.ExpenseTracker.Controllers
             : base(context)
         {
         }
-
-        /// <summary>
-        /// The endpoint to access this controller.
-        /// </summary>
-        /// <returns>The endpoint to access this controller</returns>
-        public override string EndPoint()
-        {
-            return "expenses";
-        }
     }
 }

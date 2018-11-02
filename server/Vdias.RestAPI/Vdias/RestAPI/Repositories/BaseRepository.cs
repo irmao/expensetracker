@@ -34,7 +34,7 @@ namespace Vdias.RestAPI.Repositories
         /// Returns an IQueryable with all the elements in the database.
         /// </summary>
         /// <returns>An IQueryable with all the elements in the database</returns>
-        public virtual IQueryable<TEntity> GetAll()
+        public virtual IQueryable<TEntity> Find()
         {
             return this.context.Set<TEntity>();
         }
@@ -44,9 +44,9 @@ namespace Vdias.RestAPI.Repositories
         /// </summary>
         /// <param name="id">The id of the element to be found.</param>
         /// <returns>The element</returns>
-        public virtual TEntity GetOne(long id)
+        public virtual TEntity Find(long id)
         {
-            return this.GetAll().SingleOrDefault(e => e.Id == id);
+            return this.Find().SingleOrDefault(e => e.Id == id);
         }
 
         /// <summary>
