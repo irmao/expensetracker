@@ -8,25 +8,21 @@ namespace Vdias.ExpenseTracker.Models
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Vdias.ExpenseTracker.Attributes;
     using Vdias.RestAPI.Models;
 
     /// <summary>
     /// Model that represents an expense.
     /// </summary>
     [Table("Expense")]
-    public class Expense : BaseModel
+    public class Expense : ExpiringModel
     {
         /// <summary>
         /// Gets or sets the expense value.
         /// </summary>
         [Required]
+        [Range(0, double.MaxValue)]
         public decimal Value { get; set; }
-
-        /// <summary>
-        /// Gets or sets the date that the value was expended.
-        /// </summary>
-        [Required]
-        public DateTime Date { get; set; }
 
         /// <summary>
         /// Gets or sets the expense description.
@@ -42,23 +38,23 @@ namespace Vdias.ExpenseTracker.Models
         /// <summary>
         /// Gets or sets the expense type.
         /// </summary>
-        [Required]
         public ExpenseType ExpenseType { get; set; }
 
         /// <summary>
         /// Gets or sets the expense type id.
         /// </summary>
+        [ReallyRequired]
         public long ExpenseTypeId { get; set; }
 
         /// <summary>
         /// Gets or sets the expense frequency.
         /// </summary>
-        [Required]
-        public ExpenseFrequency ExpenseFrequency { get; set; }
+        public Frequency Frequency { get; set; }
 
         /// <summary>
         /// Gets or sets the expense frequency id.
         /// </summary>
-        public long ExpenseFrequencyId { get; set; }
+        [ReallyRequired]
+        public long FrequencyId { get; set; }
     }
 }

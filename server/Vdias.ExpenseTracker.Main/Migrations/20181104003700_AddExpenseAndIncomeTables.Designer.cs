@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Vdias.ExpenseTracker.Models;
 
-namespace Vdias.ExpenseTracker.Migrations
+namespace Vdias.ExpenseTracker.Main.Migrations
 {
     [DbContext(typeof(ExpenseTrackerDBContext))]
-    [Migration("20181102142043_AddExpenseTypeAndExpenseFrequency")]
-    partial class AddExpenseTypeAndExpenseFrequency
+    [Migration("20181104003700_AddExpenseAndIncomeTables")]
+    partial class AddExpenseAndIncomeTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,39 +28,26 @@ namespace Vdias.ExpenseTracker.Migrations
 
                     b.Property<string>("Comment");
 
-                    b.Property<DateTime>("Date");
-
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<long>("ExpenseFrequencyId");
+                    b.Property<DateTimeOffset?>("EndDate");
 
                     b.Property<long>("ExpenseTypeId");
+
+                    b.Property<long>("FrequencyId");
+
+                    b.Property<DateTimeOffset>("StartDate");
 
                     b.Property<decimal>("Value");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpenseFrequencyId");
-
                     b.HasIndex("ExpenseTypeId");
 
+                    b.HasIndex("FrequencyId");
+
                     b.ToTable("Expense");
-                });
-
-            modelBuilder.Entity("Vdias.ExpenseTracker.Models.ExpenseFrequency", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<decimal>("AverageTimesPerMonth");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExpenseFrequency");
                 });
 
             modelBuilder.Entity("Vdias.ExpenseTracker.Models.ExpenseType", b =>
@@ -76,16 +63,62 @@ namespace Vdias.ExpenseTracker.Migrations
                     b.ToTable("ExpenseType");
                 });
 
+            modelBuilder.Entity("Vdias.ExpenseTracker.Models.Frequency", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("AverageTimesPerMonth");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Frequency");
+                });
+
+            modelBuilder.Entity("Vdias.ExpenseTracker.Models.Income", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<DateTimeOffset?>("EndDate");
+
+                    b.Property<long>("FrequencyId");
+
+                    b.Property<DateTimeOffset>("StartDate");
+
+                    b.Property<decimal>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FrequencyId");
+
+                    b.ToTable("Income");
+                });
+
             modelBuilder.Entity("Vdias.ExpenseTracker.Models.Expense", b =>
                 {
-                    b.HasOne("Vdias.ExpenseTracker.Models.ExpenseFrequency", "ExpenseFrequency")
-                        .WithMany()
-                        .HasForeignKey("ExpenseFrequencyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Vdias.ExpenseTracker.Models.ExpenseType", "ExpenseType")
                         .WithMany()
                         .HasForeignKey("ExpenseTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Vdias.ExpenseTracker.Models.Frequency", "Frequency")
+                        .WithMany()
+                        .HasForeignKey("FrequencyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Vdias.ExpenseTracker.Models.Income", b =>
+                {
+                    b.HasOne("Vdias.ExpenseTracker.Models.Frequency", "Frequency")
+                        .WithMany()
+                        .HasForeignKey("FrequencyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

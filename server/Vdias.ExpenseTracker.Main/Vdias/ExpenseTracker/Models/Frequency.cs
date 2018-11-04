@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ExpenseFrequency.cs" company="Vinicius Dias">
+// <copyright file="Frequency.cs" company="Vinicius Dias">
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -10,10 +10,10 @@ namespace Vdias.ExpenseTracker.Models
     using Vdias.RestAPI.Models;
 
     /// <summary>
-    /// Model that represents the frequency that the expense occurs.
+    /// Model that represents the frequency that an expense or income occurs.
     /// </summary>
-    [Table("ExpenseFrequency")]
-    public class ExpenseFrequency : BaseModel
+    [Table("Frequency")]
+    public class Frequency : BaseModel
     {
         /// <summary>
         /// Gets or sets the description.

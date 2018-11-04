@@ -24,12 +24,29 @@ namespace Vdias.RestAPI.Repositories
         private readonly DbContext context;
 
         /// <summary>
+        /// Gets or sets a flag indicating whether the child elements of the entity should be added or updated
+        /// along with the entity itself. Defaults to false, which means that child elements are not udpated.
+        /// </summary>
+        public bool DeepSave { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
         /// </summary>
         /// <param name="context">The context</param>
-        public BaseRepository(DbContext context)
+        public BaseRepository(DbContext context) : this(context, false)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
+        /// </summary>
+        /// <param name="context">The context</param>
+        /// <param name="deepSave">Flag indicating whether the child elements should be add/update 
+        /// along with their parents or not.</param>
+        public BaseRepository(DbContext context, bool deepSave)
         {
             this.context = context;
+            this.DeepSave = deepSave;
         }
 
         /// <summary>
@@ -68,7 +85,14 @@ namespace Vdias.RestAPI.Repositories
         /// <param name="record">The record to be added.</param>
         public virtual void Create(TEntity record)
         {
-            this.context.Add(record);
+            if (this.DeepSave)
+            {
+                this.context.Add(record);
+            }
+            else
+            {
+                this.context.Entry(record).State = EntityState.Added;
+            }
         }
 
         /// <summary>
@@ -77,7 +101,14 @@ namespace Vdias.RestAPI.Repositories
         /// <param name="record">The record to be updated.</param>
         public virtual void Update(TEntity record)
         {
-            this.context.Update(record);
+            if (this.DeepSave)
+            {
+                this.context.Update(record);
+            }
+            else
+            {
+                this.context.Entry(record).State = EntityState.Modified;
+            }
         }
 
         /// <summary>
@@ -86,7 +117,14 @@ namespace Vdias.RestAPI.Repositories
         /// <param name="record">Record to be deleted.</param>
         public virtual void Delete(TEntity record)
         {
-            this.context.Remove(record);
+            if (this.DeepSave)
+            {
+                this.context.Remove(record);
+            }
+            else
+            {
+                this.context.Entry(record).State = EntityState.Deleted;
+            }
         }
 
         /// <summary>

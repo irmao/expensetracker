@@ -32,8 +32,13 @@ namespace Vdias.ExpenseTracker.Models
         public DbSet<ExpenseType> ExpenseTypess { get; set; }
 
         /// <summary>
-        /// Gets or sets the Expense Frequencies db reference.
+        /// Gets or sets the Frequencies db reference.
         /// </summary>
-        public DbSet<ExpenseFrequency> ExpenseFrequencies { get; set; }
+        public DbSet<Frequency> Frequencies { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Incomes db reference.
+        /// </summary>
+        public DbSet<Income> Incomes { get; set; }
     }
 }

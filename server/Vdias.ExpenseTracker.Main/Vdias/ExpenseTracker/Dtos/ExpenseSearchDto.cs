@@ -22,7 +22,7 @@ namespace Vdias.ExpenseTracker.Dtos
         /// <summary>
         /// Gets or sets the expense frequency id to filter by.
         /// </summary>
-        public long? ExpenseFrequencyId { get; set; }
+        public long? FrequencyId { get; set; }
 
         /// <summary>
         /// Applies the filters.
@@ -31,9 +31,9 @@ namespace Vdias.ExpenseTracker.Dtos
         /// <returns>The updated query</returns>
         public override IQueryable<Expense> ApplyFilter(IQueryable<Expense> query)
         {
-            if (this.ExpenseFrequencyId != null)
+            if (this.FrequencyId != null)
             {
-                query = query.Where(e => e.ExpenseFrequencyId == this.ExpenseFrequencyId);
+                query = query.Where(e => e.FrequencyId == this.FrequencyId);
             }
 
             if (this.ExpenseTypeId != null)
