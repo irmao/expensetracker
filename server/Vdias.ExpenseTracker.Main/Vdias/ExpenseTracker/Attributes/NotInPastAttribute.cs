@@ -8,6 +8,7 @@ namespace Vdias.ExpenseTracker.Attributes
     using System;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+    using Vdias.ExpenseTracker.Extensions;
 
     /// <summary>
     /// Attribute for validating dates that should not be in the past.
@@ -33,7 +34,7 @@ namespace Vdias.ExpenseTracker.Attributes
         {
             var date = (DateTimeOffset)value;
 
-            if (date < DateTimeOffset.Now)
+            if (date < DateTimeOffset.Now.StartOfDay())
             {
                 return new ValidationResult(this.ErrorMessage);
             }
