@@ -1,3 +1,5 @@
 server/*/bin/*
 server/*/obj/*
 server/*/appsettings.Development.json
+server/.sonarqube
+server/.scannerwork

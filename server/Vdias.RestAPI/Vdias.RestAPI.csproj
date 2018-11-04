@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <CodeAnalysisRuleSet>../stylecop.ruleset</CodeAnalysisRuleSet>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ProjectGuid>10645803-7392-48CE-9758-C9C77048DE45</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
