@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="Vinicius Dias">
+// <copyright file="BaseController{TEntity}{TSearchDto}.cs" company="Vinicius Dias">
 //     All Rights Reserved.
 // </copyright>
 //-----------------------------------------------------------------------
