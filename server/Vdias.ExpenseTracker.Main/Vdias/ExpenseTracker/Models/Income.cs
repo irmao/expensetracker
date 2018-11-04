@@ -8,6 +8,7 @@ namespace Vdias.ExpenseTracker.Models
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Vdias.ExpenseTracker.Attributes;
     using Vdias.RestAPI.Models;
 
     /// <summary>
@@ -25,8 +26,13 @@ namespace Vdias.ExpenseTracker.Models
         /// <summary>
         /// Gets or sets the frequency.
         /// </summary>
-        [Required]
         public Frequency Frequency { get; set; }
+
+        /// <summary>
+        /// Gets or sets the frequency id.
+        /// </summary>
+        [ReallyRequired]
+        public long FrequencyId { get; set; }
 
         /// <summary>
         /// Gets or sets the income value.

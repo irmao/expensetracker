@@ -16,6 +16,14 @@ namespace Vdias.ExpenseTracker.Attributes
     public class ReallyRequiredAttribute : ValidationAttribute
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="ReallyRequiredAttribute"/> class.
+        /// </summary>
+        public ReallyRequiredAttribute()
+            : base("Field is required.")
+        {
+        }
+
+        /// <summary>
         /// Checks whether the value is null or have the default have for its type. If so, returns an error.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -31,18 +39,10 @@ namespace Vdias.ExpenseTracker.Attributes
             if (value == null
                 || (propType.IsValueType && object.Equals(Activator.CreateInstance(propType), value)))
             {
-                return new ValidationResult(GetErrorMessage());
+                return new ValidationResult(this.ErrorMessage);
             }
 
             return ValidationResult.Success;
-        }
-
-        /// <summary>
-        /// Gets the error message.
-        /// </summary>
-        private static string GetErrorMessage()
-        {
-            return "Field is required.";
         }
     }
 }

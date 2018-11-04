@@ -31,7 +31,7 @@ namespace Vdias.RestAPI.Controllers
         /// Initializes a new instance of the <see cref="BaseController{TEntity, TSearchDto}"/> class.
         /// </summary>
         /// <param name="context">The db context</param>
-        public BaseController(DbContext context)
+        protected BaseController(DbContext context)
         {
             this.repository = new BaseRepository<TEntity>(context);
         }

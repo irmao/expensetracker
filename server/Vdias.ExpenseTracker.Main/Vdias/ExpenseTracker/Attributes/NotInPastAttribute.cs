@@ -15,6 +15,14 @@ namespace Vdias.ExpenseTracker.Attributes
     public class NotInPastAttribute : ValidationAttribute
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="NotInPastAttribute"/> class.
+        /// </summary>
+        public NotInPastAttribute()
+            : base("Date in in the past")
+        {
+        }
+
+        /// <summary>
         /// Validates the date in the validation context against the current date. If the date in the context is in the past,
         /// returns an error.
         /// </summary>
@@ -27,18 +35,10 @@ namespace Vdias.ExpenseTracker.Attributes
 
             if (date < DateTimeOffset.Now)
             {
-                return new ValidationResult(GetErrorMessage());
+                return new ValidationResult(this.ErrorMessage);
             }
 
             return ValidationResult.Success;
-        }
-
-        /// <summary>
-        /// Gets the error message.
-        /// </summary>
-        private static string GetErrorMessage()
-        {
-            return "Date is in the past.";
         }
     }
 }

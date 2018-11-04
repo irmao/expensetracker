@@ -23,10 +23,10 @@ namespace Vdias.RestAPI.Models
         public long Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Validates the model.
         /// </summary>
-        /// <param name="validationContext"></param>
-        /// <returns></returns>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>An enumerable with the validation errors.</returns>
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             return Enumerable.Empty<ValidationResult>();

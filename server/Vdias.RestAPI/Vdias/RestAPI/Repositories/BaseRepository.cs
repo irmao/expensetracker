@@ -24,16 +24,11 @@ namespace Vdias.RestAPI.Repositories
         private readonly DbContext context;
 
         /// <summary>
-        /// Gets or sets a flag indicating whether the child elements of the entity should be added or updated
-        /// along with the entity itself. Defaults to false, which means that child elements are not udpated.
-        /// </summary>
-        public bool DeepSave { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
         /// </summary>
         /// <param name="context">The context</param>
-        public BaseRepository(DbContext context) : this(context, false)
+        public BaseRepository(DbContext context)
+            : this(context, false)
         {
         }
 
@@ -41,13 +36,19 @@ namespace Vdias.RestAPI.Repositories
         /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
         /// </summary>
         /// <param name="context">The context</param>
-        /// <param name="deepSave">Flag indicating whether the child elements should be add/update 
+        /// <param name="deepSave">Flag indicating whether the child elements should be add/update
         /// along with their parents or not.</param>
         public BaseRepository(DbContext context, bool deepSave)
         {
             this.context = context;
             this.DeepSave = deepSave;
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the child elements of the entity should be added or updated
+        /// along with the entity itself. Defaults to false, which means that child elements are not udpated.
+        /// </summary>
+        public bool DeepSave { get; set; }
 
         /// <summary>
         /// Returns an IQueryable with all the elements in the database that match the given filters.
