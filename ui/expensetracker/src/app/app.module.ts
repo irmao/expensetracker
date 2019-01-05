@@ -13,15 +13,18 @@ import { AppComponent } from './app.component';
 import { FrequencyListComponent } from './core/frequency/frequency-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FrequencyDialogComponent } from './core/frequency/frequency-dialog.component';
+import { ConfirmDialogComponent } from './shared/component/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FrequencyListComponent,
-    FrequencyDialogComponent
+    FrequencyDialogComponent,
+    ConfirmDialogComponent
   ],
   entryComponents: [
-    FrequencyDialogComponent
+    FrequencyDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

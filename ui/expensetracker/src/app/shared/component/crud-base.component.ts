@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { DialogBaseComponent } from './dialog-base.component';
 import { BaseModel } from '../model/base.model';
 import { ListBaseComponent } from './list-base.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseComponent<T> {
 
@@ -32,6 +33,14 @@ export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseCom
             .subscribe();
     }
 
+    delete(id: number) {
+        this.service.delete(this.basepath(), id)
+            .pipe(
+                map(() => this.search()),
+                catchError((error) => this.hanleError(error)))
+            .subscribe();
+    }
+
     openSaveDialog(itemToEdit: T | undefined) {
         const dialogRef = this.dialog.open(this.dialogComponent());
 
@@ -47,6 +56,16 @@ export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseCom
                 } else {
                     this.create(result);
                 }
+            }
+        });
+    }
+
+    openDeleteDialog(id: number) {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+                this.delete(id);
             }
         });
     }

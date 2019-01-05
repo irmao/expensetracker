@@ -26,7 +26,9 @@
         <button mat-button (click)="openSaveDialog(item)">
           <mat-icon>edit</mat-icon>
         </button>
-        <mat-icon>delete</mat-icon>
+        <button mat-button (click)="openDeleteDialog(item.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
     </ng-container>
 

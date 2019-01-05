@@ -34,4 +34,8 @@ export abstract class RestService<T> {
   edit(uri: string, id: number, entity: T): Observable<any> {
     return this.http.put(`${endpoint}/${uri}/${id}`, entity, httpOptions);
   }
+
+  delete(uri: string, id: number): Observable<any> {
+    return this.http.delete(`${endpoint}/${uri}/${id}`);
+  }
 }
