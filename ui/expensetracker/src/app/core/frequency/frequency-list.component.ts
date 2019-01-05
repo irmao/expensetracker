@@ -3,22 +3,19 @@ import { Frequency } from 'src/app/shared/model/frequency.model';
 import { CrudBaseComponent } from 'src/app/shared/component/crud-base.component';
 import { HttpClient } from '@angular/common/http';
 import { RestService } from 'src/app/shared/service/rest.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { FrequencyDialogComponent } from './frequency-dialog.component';
 
 @Component({
-  selector: 'app-maintain-frequency',
-  templateUrl: './maintain-frequency.component.html',
-  styleUrls: ['./maintain-frequency.component.css']
+  selector: 'app-frequency-list',
+  templateUrl: './frequency-list.component.html'
 })
-export class MaintainFrequencyComponent extends CrudBaseComponent<Frequency> implements OnInit {
+export class FrequencyListComponent extends CrudBaseComponent<Frequency> implements OnInit {
 
   readonly displayedColumns: string[] = ['description', 'averageTimesPerMonth', 'actions'];
 
-  frequency: Frequency;
-
-  constructor(http: HttpClient, service: RestService<Frequency>, snackBar: MatSnackBar) {
-    super(http, service, snackBar);
-    this.frequency = new Frequency();
+  constructor(http: HttpClient, service: RestService<Frequency>, snackBar: MatSnackBar, dialog: MatDialog) {
+    super(http, service, snackBar, dialog);
   }
 
   ngOnInit() {
@@ -27,5 +24,9 @@ export class MaintainFrequencyComponent extends CrudBaseComponent<Frequency> imp
 
   basepath(): string {
     return 'frequencies';
+  }
+
+  dialogComponent() {
+    return FrequencyDialogComponent;
   }
 }

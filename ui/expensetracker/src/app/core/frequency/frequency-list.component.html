@@ -2,20 +2,6 @@
   <span>Frequencies</span>
 </mat-toolbar>
 
-<div layout *ngIf="false;">
-  <form fxLayout="column">
-    <mat-form-field>
-      <input matInput placeholder="Name" [(ngModel)]="frequency.description" name="description" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Av. Time per Month" type="number" [(ngModel)]="frequency.averageTimesPerMonth" name="averageTimesPerMonth"
-        required>
-    </mat-form-field>
-
-    <button mat-button (click)="create(frequency)">Add</button>
-  </form>
-</div>
-
 <div layout>
   <table mat-table [dataSource]="items" style="width: 100%;">
 
@@ -32,10 +18,14 @@
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-icon>add</mat-icon>
+        <button mat-button (click)="openSaveDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
       </th>
       <td mat-cell *matCellDef="let item">
-        <mat-icon>edit</mat-icon>
+        <button mat-button (click)="openSaveDialog(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
         <mat-icon>delete</mat-icon>
       </td>
     </ng-container>

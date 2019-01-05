@@ -1,29 +1,53 @@
 import { HttpClient } from '@angular/common/http';
 import { RestService } from '../service/rest.service';
-import { map, catchError } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material';
+import { catchError, map } from 'rxjs/operators';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { of } from 'rxjs/internal/observable/of';
 import { Observable } from 'rxjs';
+import { DialogBaseComponent } from './dialog-base.component';
+import { BaseModel } from '../model/base.model';
+import { ListBaseComponent } from './list-base.component';
 
-export abstract class CrudBaseComponent<T> {
+export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseComponent<T> {
 
     items: Observable<T[]>;
 
-    constructor(private http: HttpClient, private service: RestService<T>, private snackBar: MatSnackBar) { }
+    constructor(http: HttpClient, service: RestService<T>, snackBar: MatSnackBar, private dialog: MatDialog) {
+        super(http, service, snackBar);
+    }
 
     create(entity: T) {
         this.service.create(this.basepath(), entity)
-            .pipe(catchError((error) => this.hanleError(error)))
+            .pipe(
+                map(() => this.search()),
+                catchError((error) => this.hanleError(error)))
             .subscribe();
     }
 
-    search() {
-        this.items = this.service.find(this.basepath(), undefined);
+    edit(id: number, entity: T) {
+        this.service.edit(this.basepath(), id, entity)
+            .pipe(
+                map(() => this.search()),
+                catchError((error) => this.hanleError(error)))
+            .subscribe();
     }
 
-    showErrorMessage(message: string): void {
-        this.snackBar.open(message, 'Close', {
-            duration: 2000,
+    openSaveDialog(itemToEdit: T | undefined) {
+        const dialogRef = this.dialog.open(this.dialogComponent());
+
+        if (itemToEdit && itemToEdit.id) {
+            const componentInstance = dialogRef.componentInstance as DialogBaseComponent;
+            componentInstance.item = { ...itemToEdit };
+        }
+
+        dialogRef.afterClosed().subscribe((result: T) => {
+            if (result) {
+                if (result.id) {
+                    this.edit(result.id, result);
+                } else {
+                    this.create(result);
+                }
+            }
         });
     }
 
@@ -32,5 +56,5 @@ export abstract class CrudBaseComponent<T> {
         return of(error as T);
     }
 
-    abstract basepath(): string;
+    abstract dialogComponent();
 }

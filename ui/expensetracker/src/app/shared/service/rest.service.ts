@@ -30,4 +30,8 @@ export abstract class RestService<T> {
   create(uri: string, entity: T): Observable<any> {
     return this.http.post(`${endpoint}/${uri}`, entity, httpOptions);
   }
+
+  edit(uri: string, id: number, entity: T): Observable<any> {
+    return this.http.put(`${endpoint}/${uri}/${id}`, entity, httpOptions);
+  }
 }

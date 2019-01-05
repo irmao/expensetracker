@@ -6,17 +6,22 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
   MatFormFieldModule, MatInputModule, MatButtonModule, MatSnackBarModule,
-  MatTableModule, MatToolbarModule, MatIconModule
+  MatTableModule, MatToolbarModule, MatIconModule, MatDialogModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { MaintainFrequencyComponent } from './core/maintain-frequency/maintain-frequency.component';
+import { FrequencyListComponent } from './core/frequency/frequency-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FrequencyDialogComponent } from './core/frequency/frequency-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MaintainFrequencyComponent,
+    FrequencyListComponent,
+    FrequencyDialogComponent
+  ],
+  entryComponents: [
+    FrequencyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatIconModule,
     FormsModule,
+    MatDialogModule,
     HttpClientModule
   ],
   providers: [],
