@@ -37,7 +37,7 @@ export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseCom
 
         if (itemToEdit && itemToEdit.id) {
             const componentInstance = dialogRef.componentInstance as DialogBaseComponent;
-            componentInstance.item = { ...itemToEdit };
+            componentInstance.item = { ...(itemToEdit as BaseModel) };
         }
 
         dialogRef.afterClosed().subscribe((result: T) => {

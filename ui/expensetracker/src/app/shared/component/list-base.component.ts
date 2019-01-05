@@ -1,11 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { RestService } from '../service/rest.service';
-import { catchError } from 'rxjs/operators';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { of } from 'rxjs/internal/observable/of';
+import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
-import { DialogBaseComponent } from './dialog-base.component';
-import { BaseModel } from '../model/base.model';
 
 export abstract class ListBaseComponent<T> {
 
