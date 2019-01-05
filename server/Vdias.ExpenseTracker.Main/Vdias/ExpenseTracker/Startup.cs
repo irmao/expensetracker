@@ -23,6 +23,7 @@ namespace ExpenseTracker
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
     using Vdias.ExpenseTracker.Models;
+    using Microsoft.AspNetCore.Cors.Infrastructure;
 
     /// <summary>
     /// Startup class.
@@ -69,6 +70,7 @@ namespace ExpenseTracker
             this.ConfigureApiVersioning(services);
             this.ConfigureDatabase(services);
             this.ConfigureSwagger(services);
+            this.ConfigureCORS(services);
         }
 
         /// <summary>
@@ -101,6 +103,9 @@ namespace ExpenseTracker
             });
 
             // app.UseHttpsRedirection();
+
+            // use cors MUST come before use mvc
+            app.UseCors("SiteCorsPolicy");
             app.UseMvc();
         }
 
@@ -137,6 +142,24 @@ namespace ExpenseTracker
                     Title = "ExpenseTracker Web API",
                     Version = API_VERSION
                 });
+            });
+        }
+
+        /// <summary>
+        /// Adds the CORS configuration.
+        /// </summary>
+        /// <param name="services">The services collection</param>
+        private void ConfigureCORS(IServiceCollection services)
+        {
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.WithOrigins("http://localhost:4200");
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowCredentials();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
             });
         }
     }
