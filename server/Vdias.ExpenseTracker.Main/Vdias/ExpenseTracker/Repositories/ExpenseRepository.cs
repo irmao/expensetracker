@@ -5,6 +5,8 @@
 //-----------------------------------------------------------------------
 namespace Vdias.ExpenseTracker.Repositories
 {
+    using System.Linq;
+    using Microsoft.EntityFrameworkCore;
     using Vdias.ExpenseTracker.Models;
     using Vdias.RestAPI.Repositories;
 
@@ -20,6 +22,17 @@ namespace Vdias.ExpenseTracker.Repositories
         public ExpenseRepository(ExpenseTrackerDBContext context)
             : base(context)
         {
+        }
+
+        /// <summary>
+        /// Includes the necessary child entities into the given queryable.
+        /// </summary>
+        /// <param name="queryable">The queryable</param>
+        public override IQueryable<Expense> Include(IQueryable<Expense> queryable)
+        {
+            return queryable
+                .Include(i => i.Frequency)
+                .Include(e => e.ExpenseType);
         }
     }
 }

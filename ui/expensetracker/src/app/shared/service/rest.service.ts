@@ -19,23 +19,25 @@ export abstract class RestService<T> {
 
   constructor(private http: HttpClient) { }
 
-  find(uri: string, filter: any): Observable<T[]> {
-    return this.http.get(`${endpoint}/${uri}`, httpOptions).pipe(map(r => r as T[]));
+  find(filter: any): Observable<T[]> {
+    return this.http.get(`${endpoint}/${this.getUri()}`, httpOptions).pipe(map(r => r as T[]));
   }
 
-  findOne(uri: string, id: number): Observable<T> {
-    return this.http.get(`${endpoint}/${uri}/${id}`, httpOptions) as Observable<T>;
+  findOne(id: number): Observable<T> {
+    return this.http.get(`${endpoint}/${this.getUri()}/${id}`, httpOptions) as Observable<T>;
   }
 
-  create(uri: string, entity: T): Observable<any> {
-    return this.http.post(`${endpoint}/${uri}`, entity, httpOptions);
+  create(entity: T): Observable<any> {
+    return this.http.post(`${endpoint}/${this.getUri()}`, entity, httpOptions);
   }
 
-  edit(uri: string, id: number, entity: T): Observable<any> {
-    return this.http.put(`${endpoint}/${uri}/${id}`, entity, httpOptions);
+  edit(id: number, entity: T): Observable<any> {
+    return this.http.put(`${endpoint}/${this.getUri()}/${id}`, entity, httpOptions);
   }
 
-  delete(uri: string, id: number): Observable<any> {
-    return this.http.delete(`${endpoint}/${uri}/${id}`);
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${endpoint}/${this.getUri()}/${id}`);
   }
+
+  abstract getUri(): string;
 }

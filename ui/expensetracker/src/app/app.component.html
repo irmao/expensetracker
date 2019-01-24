@@ -1,1 +1,9 @@
-<app-frequency-list></app-frequency-list>
+<mat-sidenav-container class="screen-fill">
+    <mat-sidenav mode="side" opened>
+        <app-menu></app-menu>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

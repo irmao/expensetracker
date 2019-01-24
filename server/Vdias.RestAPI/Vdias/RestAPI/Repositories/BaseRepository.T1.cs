@@ -57,7 +57,7 @@ namespace Vdias.RestAPI.Repositories
         /// <returns>An IQueryable with all the elements in the database</returns>
         public virtual IQueryable<TEntity> Find(BaseSearchDto<TEntity> dto)
         {
-            return dto.ApplyFilter(this.context.Set<TEntity>());
+            return dto.ApplyFilter(this.Include(this.context.Set<TEntity>()));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Vdias.RestAPI.Repositories
         /// <returns>The element</returns>
         public virtual TEntity FindOne(long id)
         {
-            return this.context.Set<TEntity>().SingleOrDefault(e => e.Id == id);
+            return this.Include(this.context.Set<TEntity>()).SingleOrDefault(e => e.Id == id);
         }
 
         /// <summary>
@@ -144,6 +144,16 @@ namespace Vdias.RestAPI.Repositories
         public virtual Task<int> SaveChangesAsync()
         {
             return this.context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Returns a new queryable containing the given queryable with the necessary inclusions.
+        /// To be overriden as needed.
+        /// </summary>
+        /// <returns>The queryable with the necessary entities included.</returns>
+        public virtual IQueryable<TEntity> Include(IQueryable<TEntity> queryable)
+        {
+            return queryable;
         }
     }
 }

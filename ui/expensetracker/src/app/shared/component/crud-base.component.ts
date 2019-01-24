@@ -18,7 +18,7 @@ export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseCom
     }
 
     create(entity: T) {
-        this.service.create(this.basepath(), entity)
+        this.service.create(entity)
             .pipe(
                 map(() => this.search()),
                 catchError((error) => this.hanleError(error)))
@@ -26,7 +26,7 @@ export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseCom
     }
 
     edit(id: number, entity: T) {
-        this.service.edit(this.basepath(), id, entity)
+        this.service.edit(id, entity)
             .pipe(
                 map(() => this.search()),
                 catchError((error) => this.hanleError(error)))
@@ -34,7 +34,7 @@ export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseCom
     }
 
     delete(id: number) {
-        this.service.delete(this.basepath(), id)
+        this.service.delete(id)
             .pipe(
                 map(() => this.search()),
                 catchError((error) => this.hanleError(error)))

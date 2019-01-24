@@ -8,6 +8,7 @@ namespace Vdias.ExpenseTracker.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Vdias.ExpenseTracker.Dtos;
     using Vdias.ExpenseTracker.Models;
+    using Vdias.ExpenseTracker.Repositories;
     using Vdias.RestAPI.Controllers;
     using Vdias.RestAPI.Dtos;
 
@@ -23,7 +24,7 @@ namespace Vdias.ExpenseTracker.Controllers
         /// </summary>
         /// <param name="context">The db context</param>
         public IncomeController(ExpenseTrackerDBContext context)
-            : base(context)
+            : base(context, new IncomeRepository(context))
         {
         }
     }

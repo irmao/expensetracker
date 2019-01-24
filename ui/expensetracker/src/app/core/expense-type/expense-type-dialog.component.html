@@ -1,14 +1,9 @@
-<h2 mat-dialog-title>{{item && item.id ? 'Edit' : 'New'}} Frequency</h2>
+<h2 mat-dialog-title>{{item && item.id ? 'Edit' : 'New'}} Expense Type</h2>
 
 <mat-dialog-content>
     <form fxLayout="column" #form="ngForm">
         <mat-form-field>
             <input matInput placeholder="Name" [(ngModel)]="item.description" name="description" required>
-        </mat-form-field>
-
-        <mat-form-field>
-            <input matInput placeholder="Av. Time per Month" type="number" [(ngModel)]="item.averageTimesPerMonth"
-                name="averageTimesPerMonth" required>
         </mat-form-field>
     </form>
 

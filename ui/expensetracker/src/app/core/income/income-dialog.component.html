@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>{{item && item.id ? 'Edit' : 'New'}} Income</h2>
+
+<mat-dialog-content>
+    <form #form="ngForm" fxLayout="column">
+        <mat-form-field>
+            <input matInput placeholder="Name" [(ngModel)]="item.description" name="description" required>
+        </mat-form-field>
+
+        <div fxLayoutAlign="space-between center">
+            <mat-form-field>
+                <input matInput placeholder="Value" type="number" [(ngModel)]="item.value" name="value" required>
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-select placeholder="Frequency" [(ngModel)]="item.frequencyId" name="frequency" required>
+                    <mat-option *ngFor="let frequency of frequencyObservable | async" [value]="frequency.id">{{frequency.description}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="space-between center">
+            <mat-form-field>
+                <input matInput placeholder="Start Date" [matDatepicker]="startDatepicker" [(ngModel)]="item.startDate" name="startDate" required>
+                <mat-datepicker-toggle matSuffix [for]="startDatepicker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #startDatepicker></mat-datepicker>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput placeholder="End Date" [matDatepicker]="endDatepicker" [(ngModel)]="item.endDate" name="endDate">
+                <mat-datepicker-toggle matSuffix [for]="endDatepicker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #endDatepicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="item" [disabled]="!form.form.valid">Save</button>
+</mat-dialog-actions>

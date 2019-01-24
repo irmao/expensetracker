@@ -10,7 +10,7 @@ export abstract class ListBaseComponent<T> {
     constructor(protected http: HttpClient, protected service: RestService<T>, protected snackBar: MatSnackBar) { }
 
     search() {
-        this.items = this.service.find(this.basepath(), undefined);
+        this.items = this.service.find(undefined);
     }
 
     showErrorMessage(message: string): void {
@@ -18,6 +18,4 @@ export abstract class ListBaseComponent<T> {
             duration: 2000,
         });
     }
-
-    abstract basepath(): string;
 }

@@ -1,0 +1,17 @@
+.title-clickable {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    cursor: pointer;
+}
+
+.menu-item-icon {
+    padding-right: 1rem;
+}
+
+.menu-item-description {
+    display: none;
+
+    @media only screen and (min-width: 768px) {
+        display: block;
+    }
+}
