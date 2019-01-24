@@ -1,17 +1,29 @@
 .title-clickable {
-    margin-left: 4rem;
-    margin-right: 4rem;
     cursor: pointer;
+    margin-left: 1rem;
+
+    @media only screen and (min-width: 768px) {
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
 }
 
 .menu-item-icon {
-    padding-right: 1rem;
+    margin-right: 1rem;
 }
 
-.menu-item-description {
+.hidden-sm {
     display: none;
 
     @media only screen and (min-width: 768px) {
         display: block;
+    }
+}
+
+.hidden-md {
+    display: block;
+
+    @media only screen and (min-width: 768px) {
+        display: none;
     }
 }
