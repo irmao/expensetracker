@@ -4,6 +4,9 @@ import { catchError, map } from 'rxjs/operators';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { of } from 'rxjs/internal/observable/of';
 import { Observable } from 'rxjs';
+
+import flattenDeep from 'lodash.flattendeep';
+
 import { DialogBaseComponent } from './dialog-base.component';
 import { BaseModel } from '../model/base.model';
 import { ListBaseComponent } from './list-base.component';
@@ -71,7 +74,10 @@ export abstract class CrudBaseComponent<T extends BaseModel> extends ListBaseCom
     }
 
     private hanleError(error: any): Observable<T> {
-        this.showErrorMessage(error.message);
+        flattenDeep(Object.values(error.error)).forEach(msg => {
+            this.showErrorMessage(msg);
+        });
+
         return of(error as T);
     }
 

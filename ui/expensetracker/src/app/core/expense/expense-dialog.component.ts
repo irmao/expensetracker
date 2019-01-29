@@ -20,7 +20,7 @@ export class ExpenseDialogComponent implements DialogBaseComponent, OnInit {
     }
 
     ngOnInit() {
-        this.frequencyObservable = this.frequencyService.find(undefined);
-        this.expenseTypeObservable = this.expenseTypeService.find(undefined);
+        this.frequencyObservable = this.frequencyService.find(undefined, undefined);
+        this.expenseTypeObservable = this.expenseTypeService.find(undefined, undefined);
     }
 }

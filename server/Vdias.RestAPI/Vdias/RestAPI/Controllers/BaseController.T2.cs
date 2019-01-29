@@ -25,7 +25,7 @@ namespace Vdias.RestAPI.Controllers
         where TEntity : BaseModel
         where TSearchDto : BaseSearchDto<TEntity>
     {
-        private readonly BaseRepository<TEntity> repository;
+        protected readonly BaseRepository<TEntity> repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseController{TEntity, TSearchDto}"/> class.

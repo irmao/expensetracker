@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {
   MatFormFieldModule, MatInputModule, MatButtonModule, MatSnackBarModule,
   MatTableModule, MatToolbarModule, MatIconModule, MatDialogModule, MatSidenavModule, MatListModule, MatDatepickerModule,
-  MatNativeDateModule, MatSelectModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE
+  MatNativeDateModule, MatSelectModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatCardModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,8 @@ import { IncomeListComponent } from './core/income/income-list.component';
 import { IncomeDialogComponent } from './core/income/income-dialog.component';
 import { ExpenseListComponent } from './core/expense/expense-list.component';
 import { ExpenseDialogComponent } from './core/expense/expense-dialog.component';
+import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { SingleNumberCardComponent } from './core/dashboard/single-number-card.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ExpenseDialogComponent } from './core/expense/expense-dialog.component'
     IncomeListComponent,
     IncomeDialogComponent,
     ConfirmDialogComponent,
-    MenuComponent
+    MenuComponent,
+    DashboardComponent,
+    SingleNumberCardComponent
   ],
   entryComponents: [
     FrequencyDialogComponent,
@@ -49,6 +53,7 @@ import { ExpenseDialogComponent } from './core/expense/expense-dialog.component'
     BrowserModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    MatCardModule,
     MatInputModule,
     MatButtonModule,
     FlexLayoutModule,

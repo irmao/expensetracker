@@ -1,0 +1,31 @@
+<mat-toolbar>
+    <span fxFlex="1 1 auto">Dashboard</span>
+
+    <div fxLayout="row"  fxLayoutAlign="space-between center" class="filter">
+        <label for="startDate" class="m-1">From</label>
+        <mat-form-field>
+            <input matInput [matDatepicker]="startDatepicker" [(ngModel)]="startDate" name="startDate" (ngModelChange)="search()">
+            <mat-datepicker-toggle matSuffix [for]="startDatepicker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #startDatepicker></mat-datepicker>
+        </mat-form-field>
+
+        <label for="endDate" class="m-1">To</label>
+        <mat-form-field>
+            <input matInput [matDatepicker]="endDatepicker" [(ngModel)]="endDate" name="endDate" (ngModelChange)="search()">
+            <mat-datepicker-toggle matSuffix [for]="endDatepicker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #endDatepicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+</mat-toolbar>
+
+<div class="m-2">
+    <div fxLayout="row" fxLayoutGap="2%" fxLayoutWrap fxLayoutAlign="stretch center">
+        <app-single-number-card title="Incomes" subtitle="From 12/10 to 15/10" [value]="totalIncomeObservable | async"></app-single-number-card>
+        <app-single-number-card title="Expenses" subtitle="From 12/10 to 15/10" value="1500"></app-single-number-card>
+    </div>
+</div>

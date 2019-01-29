@@ -17,8 +17,13 @@ namespace Vdias.ExpenseTracker.Controllers
     /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}/incomes")]
-    public class IncomeController : BaseController<Income, NoSearchDto<Income>>
+    public class IncomeController : BaseController<Income, IncomeSearchDto>
     {
+        /// <summary>
+        /// The income repository
+        /// </summary>
+        protected IncomeRepository incomeRepository;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IncomeController"/> class.
         /// </summary>
@@ -26,6 +31,20 @@ namespace Vdias.ExpenseTracker.Controllers
         public IncomeController(ExpenseTrackerDBContext context)
             : base(context, new IncomeRepository(context))
         {
+            this.incomeRepository = this.repository as IncomeRepository;
+        }
+
+        /// <summary>
+        /// Returns the sum of the 'value' property of all the incomes that match the given filter.
+        /// </summary>
+        /// <param name="searchDto">DTO to filter the elements to be returned</param>
+        /// <returns>Action Result wrapping the sum of the 'value' property.</returns>
+        /// <response code="200">Ok</response>
+        [HttpGet("sum")]
+        [ProducesResponseType(200)]
+        public virtual ActionResult<decimal> GetValueSum([FromQuery] IncomeSearchDto searchDto)
+        {
+            return new OkObjectResult(this.incomeRepository.GetValueSum(searchDto));
         }
     }
 }

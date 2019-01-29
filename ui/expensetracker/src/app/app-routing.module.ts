@@ -4,12 +4,14 @@ import { FrequencyListComponent } from './core/frequency/frequency-list.componen
 import { ExpenseTypeListComponent } from './core/expense-type/expense-type-list.component';
 import { IncomeListComponent } from './core/income/income-list.component';
 import { ExpenseListComponent } from './core/expense/expense-list.component';
+import { DashboardComponent } from './core/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'frequencies', component: FrequencyListComponent },
   { path: 'expensetypes', component: ExpenseTypeListComponent },
   { path: 'expenses', component: ExpenseListComponent },
   { path: 'incomes', component: IncomeListComponent },
+  { path: 'dashboard', component: DashboardComponent },
 ];
 
 @NgModule({

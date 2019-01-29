@@ -8,6 +8,7 @@ namespace Vdias.ExpenseTracker.Repositories
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
     using Vdias.ExpenseTracker.Models;
+    using Vdias.RestAPI.Dtos;
     using Vdias.RestAPI.Repositories;
 
     /// <summary>
@@ -31,6 +32,16 @@ namespace Vdias.ExpenseTracker.Repositories
         public override IQueryable<Income> Include(IQueryable<Income> queryable)
         {
             return queryable.Include(i => i.Frequency);
+        }
+
+        /// <summary>
+        /// Returns the sum of the values of all Incomes that match the given filter.
+        /// </summary>
+        /// <param name="dto">The search dto that will apply the filters.</param>
+        /// <returns>The sum of the 'value' property of the returned items.</returns>
+        public virtual decimal GetValueSum(BaseSearchDto<Income> dto)
+        {
+            return this.Find(dto).Sum(i => i.Value);
         }
     }
 }

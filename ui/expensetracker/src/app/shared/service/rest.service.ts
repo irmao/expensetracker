@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 
 const endpoint = 'http://localhost:5000/api/v1';
 
@@ -17,10 +15,16 @@ const httpOptions = {
 })
 export abstract class RestService<T> {
 
-  constructor(private http: HttpClient) { }
+  constructor(protected http: HttpClient) { }
 
-  find(filter: any): Observable<T[]> {
-    return this.http.get(`${endpoint}/${this.getUri()}`, httpOptions).pipe(map(r => r as T[]));
+  find(resource: string|undefined, filter: any): Observable<any> {
+    let baseUrl = `${endpoint}/${this.getUri()}`;
+
+    if (resource) {
+      baseUrl += `/${resource}`;
+    }
+
+    return this.http.get(baseUrl, {...httpOptions, params: filter});
   }
 
   findOne(id: number): Observable<T> {

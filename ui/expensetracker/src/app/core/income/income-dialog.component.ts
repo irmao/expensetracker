@@ -17,6 +17,6 @@ export class IncomeDialogComponent implements DialogBaseComponent, OnInit {
     }
 
     ngOnInit() {
-        this.frequencyObservable = this.frequencyService.find(undefined);
+        this.frequencyObservable = this.frequencyService.find(undefined, undefined);
     }
 }

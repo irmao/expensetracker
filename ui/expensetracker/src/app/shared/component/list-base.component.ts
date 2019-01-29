@@ -10,7 +10,7 @@ export abstract class ListBaseComponent<T> {
     constructor(protected http: HttpClient, protected service: RestService<T>, protected snackBar: MatSnackBar) { }
 
     search() {
-        this.items = this.service.find(undefined);
+        this.items = this.service.find(undefined, undefined);
     }
 
     showErrorMessage(message: string): void {
